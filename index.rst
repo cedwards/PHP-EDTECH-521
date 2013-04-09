@@ -213,14 +213,6 @@ Sending Mail
     $mailbody = "Hello, world!";          
     mail($mailaddress, $mailsubject, $mailbody);
 
-The primary function for sending email is mail(), which takes three basic
-parameters and one optional one. These parameters are, in order, the email
-address to send to, the subject of the message, the body of the message, and
-finally, any extra headers you want to include. Note that this functionality
-relies on a working email server that you have permission to use: for Unix
-machines, this is often Sendmail; Windows machines, you must set up the SMTP
-value in your php.ini file.                                                                                                                                     
-
 MIME Types
 ==========
 
@@ -228,16 +220,6 @@ MIME Types
 
     print mime_content_type("myfiles.zip");
     print mime_content_type("poppy.jpg");  
-
-The Multipurpose Internet Mail Extensions (MIME) system was designed to allow
-the formatting of emails so that they can include files, and it is made up of
-several parts. In order to be able to instruct email clients what types of
-files are attached, MIME types were created–short, textual descriptions of the
-file types that can be recognized by everyone. MIME types are so popular that
-they are used across the Web as a whole now, and mayn operating systems rely on
-them to decide how to open a file. In emails, attachments are literally copied
-into the message as an encoded string, with MIME boundary markers being used to
-tell mail readers where each attachment starts and stops.                                                                                                                                        
 
 Easier Mail Sending with PEAR::Mail
 ===================================
@@ -254,12 +236,6 @@ Easier Mail Sending with PEAR::Mail
     $headers = array("From"=>"me@example.com", "Subject"=>"Test Mail");
     $body = "This is a test!";                                         
     $mail->send("best@friend.com", $headers, $body);                   
-
-The Mail.php file is the PEAR::Mail script, so it needs to be included before
-any PEAR::Mail functions are used. Line two creates a default instance of
-PEAR::Mail–the parameter mail is passed in so that PEAR::Mail will use PHP's
-mail() function to send the email. If you pass in sendmail, it will send direct
-via the sendmail program (Unix only).                                                                
 
 Sending Mixed-Type Messages with PEAR::Mail_Mime
 ================================================
@@ -286,33 +262,6 @@ Sending Mixed-Type Messages with PEAR::Mail_Mime
     $mail = Mail::factory("mail");                                             
     $mail->send("best@friend.com", $headers, $body);                           
 
-Now the script includes both PEAR::Mail and PEAR::Mail_Mime, as it takes both
-classes to get the full email sent. Also, rather than handling our message as a
-text string, the message is an instance of Mail_mime. In the exmaple, the
-message is stored in the $message variable. Next, both the plain text and HTML
-messages are retrieved from disk using file_get_contents() and stored in $text
-and $html, respectively.                                                                                                                                                                                                         
-
-Once we have the content loaded, we can put it into the message using the
-setTxtBody() and setHTMLBody() methods of our $message variable. These both
-take a string as their only parameter, so just pass in the appropriate return
-value from file_get_contents().                                                                                                                                                       
-
-The body for the message, still stored in $body, now comes from the return
-value of $message_>get(). This retrieves the full message text to send, and is
-a combination of the HTML and text information all encoded for sending over the
-Internet. If you want to see how the system works behind the scenes, echo out
-$body and have a look through.                                                                    
-
-With the line starting “$extraheaders = ”, things begin to get more
-complicated. The PEAR::Mail→send() function takes its headers as an array and,
-to accommodate this, PEAR::Mail_Mime also returns its headers as an array. When
-sending complex emails, you need to have a special set of headers in there that
-tells the mail reader what to expect. So, once you have your content in place,
-you just call headers() to get the header information. As you still need to use
-the old headers (from, subject, etc.), you can pass into headers() an array of
-existing headers, and it will add these to the array it returns.      
-
 Sending Real Attachments
 ========================
 
@@ -320,17 +269,594 @@ Sending Real Attachments
 
     $message->addAttachment("example.txt");
 
-Using PEAR::Mail_Mime makes it very easy to add attachments to your messages.
-Add this line after the call to setHTMLBody():
-
-You will, of course, need to change example.txt to the name of a file in the
-same directory as the script. That's all it takes to add an attachment once you
-are using PEAR::Mail and PEAR::Mail_Mime.
-
 Lab : Mail
 ==========
 
 - Install PEAR::Mail and PEAR::Mail_MIME.
 - Email form data to yourself.
 - Remember to check-in your code changes.
+
+Overview
+========
+
+  - Files
+
+=====
+Files
+=====
+
+Files : Objectives
+==================
+
+  - Reading, Editing and Creating Files
+  - Uploading Files                    
+  - Locking Files                      
+  - File Permissions                   
+  - Parsing Config Files               
+
+=============
+Reading Files
+=============
+
+readfile()
+==========
+
+.. code-block:: php
+
+    $testfile = @readfile('test.txt');
+                                      
+    if (!$testfile) {                 
+      print "Could not open file\n";  
+    }                                 
+
+file_get_contents()
+===================
+
+.. code-block:: php
+
+    $filename = 'test.txt';
+    
+    $filestring = file_get_contents($filename);
+    if ($filestring) {                         
+        print $filestring                      
+    } else {                                   
+        print "Could not open $filename.\n";   
+    }                                          
+
+file()
+======
+
+.. code-block:: php
+
+    $filename = "test.txt";
+    
+    $filearray = file($filename);
+    
+    if ($filearray) {
+       while (list($var, $val) = each($filearray)) {
+           ++$var;
+           $val = trim($val);
+           print "Line $var: $val\n";
+       }
+    } else {
+       print "Could not open $filename.\n";
+    }
+
+fopen() and fread()
+===================
+
+**fopen()**
+  - file to open, how you would like it opened.
+  - read from 'r', write to 'w', or append to 'a'.
+
+**fread()**
+  - a file handle to read, and the number of bytes to read.
+
+fopen() : Example
+=================
+
+.. code-block:: php
+
+    $fh_flowers = fopen("kinds_of_flowers.txt", "r")
+          or die("Can't open flowers file!\n");     
+                                                    
+    $fh_logfile = fopen("application.log", "w")    
+        or die("Log file not writeable!\n");        
+
+fread() : Example 1
+===================
+
+.. code-block:: php
+
+    $huge_file = fopen("VERY_BIG_FILE", "r");
+                                             
+    while (!feof($huge_file)) {              
+        print fread($huge_file, 1024);       
+    }                                        
+                                             
+    fclose($huge_file);                      
+
+fread() : Example 2
+===================
+
+.. code-block:: php
+
+    $zipfile = fopen("data.zip", "r");
+    
+    if (fread($zipfile, 2) != "PK") {
+        print "data.zip is not a valid Zip file!";
+    }
+    
+    fclose($zipfile);
+
+Reading by line using fgets()
+=============================
+
+.. code-block:: php
+
+    $access_log = fopen("access_log", "r");
+                                           
+    while (!feof($access_log)) {           
+        $line = fgets($access_log);        
+                                           
+        if (preg_match("/^Error:/", $line)) {
+            print $line;                     
+        }                                    
+    }                                        
+                                             
+    fclose($access_log);                     
+
+Lab : Reading Files
+===================
+
+Use 3 of the following:
+
+  - readfile()
+  - file_get_contents()
+  - file()
+  - fopen()
+  - fread()
+  - fgets()
+
+Creating and Changing Files
+===========================
+
+file_put_contents()
+===================
+
+.. code-block:: php
+
+    filename = 'new_file.txt';
+    
+    $myarray[] = "This is line one";
+    $myarray[] = "This is line two";
+    $myarray[] = "This is line three";
+    $mystring = implode("\n", $myarray);
+    $numbytes = file_put_contents($filename, "$mystring\n");
+    print "$numbytes bytes written";
+
+fwrite()
+========
+
+.. code-block:: php
+
+    $handle = fopen($filename, "wb");
+    $numbytes = fwrite($handle, $mystring);
+    fclose($handle);                       
+    print "$numbytes bytes written\n";     
+
+rename()
+========
+
+.. code-block:: php
+
+    $filename2 = $filename . '.old';
+    $result = rename($filename, $filename2);
+    if ($result) {                          
+        print "$filename has been renamed to $filename2.\n";
+    } else {                                                
+        print "Error: couldn't rename $filename to $filename2!\n";
+    }                                                             
+
+copy()
+======
+
+.. code-block:: php
+
+    $filename2 = $filename . '.old';
+    $result = copy($filename, $filename2);
+    if ($result) {                        
+        print "$filename has been copied to $filename2.\n";
+    } else {                                               
+        print "Error: couldn't copy $filename to $filename2!\n";
+    }                                                           
+
+unlink()
+========
+
+.. code-block:: php
+
+    if (unlink($filename)) {
+        print "Deleted $filename!\n";
+    } else {                         
+        print "Delete of $filename failed!\n";
+    }                                         
+
+file_exists()
+=============
+
+.. code-block:: php
+
+    if (file_exists("snapshot1.png")) {
+        print "Snapshot1.png exists!\n";
+    } else {                            
+        print "Snapshot1.png does not exist!\n";
+    }                                           
+
+Lab : Writing Files
+===================
+
+Use 3 of the following:
+
+  - file_put_contents()
+  - fwrite()
+  - rename()
+  - copy()
+  - unlink()
+  - file_exists()
+
+File Time Information
+=====================
+
+.. code-block:: php
+
+    $contacts = "contacts.txt";
+    $atime = fileatime($contacts);
+    $mtime = filemtime($contacts);
+    
+    $atime_str = date("F jS Y H:i:s", $atime);
+    $mtime_str = date("F jS Y H:i:s", $mtime);
+    // eg June 8th 2005 16:04:15 
+    
+    print "File last accessed: $atime_str\n";
+    print "File last modified: $mtime_str\n";
+
+
+Filename Information
+====================
+
+.. code-block:: php
+
+    $fileinfo = pathinfo($filename);
+    var_dump($fileinfo);
+
+Locking Files with flock()
+==========================
+
+.. code-block:: php
+
+    $handle = fopen( $filename, "w");
+    // open it for WRITING ("w")
+    
+    if (flock($handle, LOCK_EX)) {
+        // do your file writes here
+        flock($handle, LOCK_UN);
+        // unlock the file
+    } else {
+        // flock() returned false, no lock obtained
+        print "Could not lock $filename!\n";
+    }                                          
+
+UNIX File Permissions
+=====================
+
+.. code-block:: bash
+
+    -rw-r--r-- 1 cedwards cedwards 4.5K 2012-11-11 09:06 start.txt
+
+    r = 4 (read)
+    w = 2 (write)
+    x = 1 (execute)
+
+Reading File Permissions and Status
+===================================
+
+  - is_readable()
+  - is_writeable()
+  - is_executable()
+  - is_file()
+  - is_dir()
+
+Changing File Permissions and Ownership
+=======================================
+
+.. code-block:: php
+
+    chmod("/var/www/myfile.txt", 0777);
+    chmod("/var/www/myfile.txt", 0755);
+
+Lab : File Permissions
+======================
+
+Use 5 of the following:
+
+  - fileatime()
+  - filemtime()
+  - pathinfo()
+  - flock()
+  - is_readable(), is_writeable()
+  - is_file(), is_dir()
+  - chmod()
+
+=====================
+Handling File Uploads
+=====================
+
+Upload HTML Form
+================
+
+.. code-block:: html
+
+    <form enctype="multipart/form-data" action="uploader.php" method="post">
+      <input type="hidden" name="MAX_FILE_SIZE" value="200000" />
+      Choose a file to upload: <input name="uploadfile" type="file" /><br />
+      <input type="submit" value="Upload" />
+    </form>
+
+Upload PHP Controller
+=====================
+
+.. code-block:: php
+
+    <?php
+      $target_path = "uploads/";
+      
+      $target_path = $target_path . basename($_FILES['uploadfile']['name']); 
+      
+      if (move_uploaded_file($_FILES['uploadfile']['tmp_name'], $target_path)) {
+        echo "The file " .  basename( $_FILES['uploadedfile']['name']) 
+        . " has been uploaded";
+      } else {
+          echo "There was an error uploading the file, please try again!";
+      }
+    ?>
+
+Lab : Upload
+============
+
+  - create a simple upload form
+  - move uploaded file using move_uploaded_file()
+
+===================
+Regular Expressions
+===================
+
+Objectives : Regular Expressions
+================================
+
+  - When to use regular expressions
+  - Regular expression patterns
+  - Practice, practice, practice
+
+Before
+======
+
+.. code-block:: php
+
+    \b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b
+
+
+Defining Your Requirements (Discuss)
+====================================
+
+  - Define: Utah phone number
+  - Define: Utah address
+  - Define: secure password requirements
+
+Basic Regexps with preg_match()
+===============================
+
+  - the pattern to match and the string to match it against
+  - returns as soon as it finds the first match
+
+preg_match() : Example
+======================
+
+.. code-block:: php
+
+    if (preg_match("/php/i", "PHP")) {
+        print "Got match!\n";
+    }
+
+Regexp Character Classes
+========================
+
+  - [abc]
+  - [A-Za-z]
+  - [0-9]
+  - [^123]
+
+Character Classes : Example 1
+=============================
+
+.. code-block:: php
+
+    if (preg_match("/[Ff]oo/", "Foo"))
+
+Character Classes : Example 2
+=============================
+
+.. code-block:: php
+
+    if (preg_match("/[^a-z]esting/i", "Testing"))
+
+Character Classes : Example 3
+=============================
+
+.. code-block:: php
+
+    if (preg_match("/[A-S]esting/", "Testing"))
+
+Lab : Regex Character Classes
+=============================
+
+Write three regular expression patterns using character classes for:
+
+  - a name, limited to the first half of the alphabet
+  - a job title in the medical industry
+  - a street address
+
+Regexp Special Characters
+=========================
+
+  - ``+``, ``*``, ``?`` 
+  - { }
+  - ( )
+  - $, and ^
+
+Special Characters : Example 1
+==============================
+
+.. code-block:: php
+
+    if (preg_match("/[A-Z][A-Z0-9]+/i", "A123"))
+
+Special Characters : Example 2
+==============================
+
+.. code-block:: php
+
+    if (preg_match("/[0-9]?[A-Z]+/", "10GreenBottles"))
+
+Special Characters : Example 3
+==============================
+
+.. code-block:: php
+
+    if (preg_match("/[A-Z]?[A-Z]?[A-Z]*/", ""))
+
+Special Characters : Example 4
+==============================
+
+.. code-block:: php
+
+    if (preg_match("/[A-Z]{3}/", "FuZ"))
+
+Special Characters : Example 5
+==============================
+
+.. code-block:: php
+
+    if (preg_match("/[A-Z]{3}/i", "FuZ"))
+
+Special Characters : Example 6
+==============================
+
+.. code-block:: php
+
+    if (preg_match("/[A-Z]{1,5}[0-9]{2}/i", "adams42"))
+
+Special Characters : Example 7
+==============================
+
+.. code-block:: php
+
+    if (print preg_match("/(Linux|Mac OS X)/", "Linux"))
+
+Special Characters : Example 8
+==============================
+
+.. code-block:: php
+
+    if (print preg_match("/contra(diction|vention)/", "contravention"))
+
+Special Characters : Example 9
+==============================
+
+.. code-block:: php
+
+    if (print preg_match(
+    "/Windows (([0-9][0-9]+|Me|XP)|Codename (Whistler|Longhorn))/", 
+    "Windows Codename Whistler"))
+
+Special Characters : Example 10
+===============================
+
+.. code-block:: php
+
+    if (preg_match("/\?$/", "Does this match?"))
+
+Special Characters : Example 11
+===============================
+
+.. code-block:: php
+
+    if (preg_match("/\?$/", "Does this match? Are you sure."))
+
+Special Characters : Example 12
+===============================
+
+.. code-block:: php
+
+    if (preg_match("/^PHP FTW!/", "PHP FTW!!!!!"))
+
+Lab : Regex Special Characters
+==============================
+
+Use each of the following in any number of preg_match() tests:
+
+  - ``+``, ``*``, ``?``
+  - { }
+  - ( )
+  - $, and ^
+
+Words and Whitespace Regexps
+============================
+
+  - .
+  - \s, \S
+  - \b, \B
+
+Words and Whitespace : Example 1
+================================
+
+.. code-block:: php
+
+    if (preg_match("/c.t/", "cart"))
+
+Words and Whitespace : Example 2
+================================
+
+.. code-block:: php
+
+    if (preg_match("/[\S]{7}[\s]{1}[\S]{6}/", "Foolish Child"))
+
+Words and Whitespace : Example 3
+================================
+
+.. code-block:: php
+
+    if (preg_match("/no\b/", "he said 'no!'"))
+
+Storing Matched Strings
+=======================
+
+.. code-block:: php
+
+    $a = "Foo moo boo tool foo!";
+    preg_match_all("/[A-Za-z]oo\b/i", $a, $matches);
+
+After
+=====
+
+.. code-block:: php
+
+    \b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b
+
+Lab : Regular Expressions
+=========================
+
+  - Define a regular expression to match:
+     - valid email addresses
+     - valid IP addresses
 
