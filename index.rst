@@ -409,7 +409,7 @@ Reading by line using fgets()
 Lab : Reading Files
 ===================
 
-Use 3 of the following:
+Use 5 of the following:
 
   - readfile()
   - file_get_contents()
@@ -418,6 +418,7 @@ Use 3 of the following:
   - fread()
   - fgets()
 
+===========================
 Creating and Changing Files
 ===========================
 
@@ -426,7 +427,7 @@ file_put_contents()
 
 .. code-block:: php
 
-    filename = 'new_file.txt';
+    $filename = 'new_file.txt';
     
     $myarray[] = "This is line one";
     $myarray[] = "This is line two";
@@ -496,7 +497,7 @@ file_exists()
 Lab : Writing Files
 ===================
 
-Use 3 of the following:
+Use 5 of the following:
 
   - file_put_contents()
   - fwrite()
@@ -578,7 +579,7 @@ Changing File Permissions and Ownership
 Lab : File Permissions
 ======================
 
-Use 5 of the following:
+Use 7 of the following:
 
   - fileatime()
   - filemtime()
@@ -626,6 +627,7 @@ Lab : Upload
 
   - create a simple upload form
   - move uploaded file using move_uploaded_file()
+  - upload image, save it and display it again (bonus)
 
 ===================
 Regular Expressions
@@ -894,21 +896,31 @@ See also laziness and impatience.
 Final Project
 =============
 
-Create an index page to display contents and a separate submission form.
+Create a contest submission page and PHP backend.
 
 Project Requirements
 ====================
 
-  - Name
+  - Full Name
   - Email (validated)
-  - Quote Content
+  - Country (drop-down)
+  - File Upload
   - Terms Agreement Checked
   - Spam Deterrent Mechanism
+  - Separate Error and Success Pages
+  - Email all information, including attachment, and CC: submitter
 
 Class Review
 ============
 
 Please take 5 minutes to review your class experience.
+
+Additional Study
+================
+
+Code Academy PHP Track
+
+ - http://www.codecademy.com/tracks/php
 
 Conclusion
 ==========
