@@ -1,0 +1,1097 @@
+
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PHP Level 2 (EDTECH-521) &mdash; PHP-EDTECH-521 2013-04-09 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/single.css" type="text/css" />
+    
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2013-04-09',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/common.js"></script>
+    <script type="text/javascript" src="_static/slides.js"></script>
+    <script type="text/javascript" src="_static/sync.js"></script>
+    <script type="text/javascript" src="_static/controller.js"></script>
+    <script type="text/javascript" src="_static/init.js"></script>
+    <link rel="top" title="PHP-EDTECH-521 2013-04-09 documentation" href="#" /> 
+  </head>
+  <body>
+
+<section
+   id="slide_container"
+   class='slides layout-regular'>
+
+
+  <article class="slide level-1" id="php-level-2-edtech-521">
+<h1>PHP Level 2 (EDTECH-521)</h1>
+<ul class="simple">
+<li>Author: Christer Edwards</li>
+<li>Revision: 2013-11-05</li>
+</ul>
+
+</article>
+<article class="slide level-1" id="day-1">
+<h1>Day 1</h1>
+
+</article>
+<article class="slide level-2" id="review">
+<h2>Review</h2>
+<ul class="simple">
+<li>Web Form Design and Development
+(<a class="reference external" href="http://freecourses.tutsplus.com">http://freecourses.tutsplus.com</a>)</li>
+</ul>
+
+</article>
+<article class="slide level-2" id="overview">
+<h2>Overview</h2>
+<ul class="simple">
+<li>Revision Control Tools (git)</li>
+<li>Mail</li>
+</ul>
+
+</article>
+<article class="slide level-1" id="revision-control">
+<h1>Revision Control</h1>
+
+</article>
+<article class="slide level-2" id="objectives-revision-control">
+<h2>Objectives : Revision Control</h2>
+<ul class="simple">
+<li>Background / History</li>
+<li>Discuss different source control methods.</li>
+<li>Learn basic workflow for git.</li>
+<li>Apply git to our existing source code.</li>
+</ul>
+
+</article>
+<article class="slide level-2" id="brainstorming-revision-control">
+<h2>Brainstorming Revision Control</h2>
+<p>How would you keep track of your code changes over the lifetime of your
+project?</p>
+
+</article>
+<article class="slide level-2" id="manual-snapshots">
+<h2>Manual Snapshots</h2>
+<p>Manually creating backups of files and directories is one method of managing
+revisions of your software.</p>
+<div class="highlight-bash"><div class="highlight"><pre>cp project project.bak
+cp project project-2013-11-05
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="local-version-control-rcs">
+<h2>Local Version Control (RCS)</h2>
+<img alt="_images/local-vcs.png" class="align-center" src="_images/local-vcs.png" />
+
+</article>
+<article class="slide level-2" id="centralized-version-control-svn">
+<h2>Centralized Version Control (SVN)</h2>
+<img alt="_images/central-vcs.png" class="align-center" src="_images/central-vcs.png" />
+
+</article>
+<article class="slide level-2" id="distributed-version-control-git">
+<h2>Distributed Version Control (git)</h2>
+<img alt="_images/distributed-vcs.png" class="align-center" src="_images/distributed-vcs.png" />
+
+</article>
+<article class="slide level-2" id="diff">
+<h2>diff</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">--- a/register.php  2012-07-27 11:58:26.636629381 -0600</span>
+<span class="x">+++ b/register.php  2012-07-27 11:59:11.983291297 -0600</span>
+<span class="x">@@ -1,6 +1,6 @@</span>
+<span class="x"> </span><span class="cp">&lt;?php</span>
+ <span class="nv">$m</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+ <span class="o">-</span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;submit&#39;</span><span class="p">]))</span> <span class="p">{</span>
+ <span class="o">+</span><span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;submit&#39;</span><span class="p">]))</span> <span class="p">{</span>
+
+   <span class="nv">$valid</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;password1&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;password2&#39;</span><span class="p">])</span> <span class="p">{</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="brief-background">
+<h2>Brief Background</h2>
+<p>Linus Torvalds has quipped about the name &quot;git&quot;, which is British English slang
+for a stupid or unpleasant person: &quot;I'm an egotistical bastard, and I name all
+my projects after myself. First Linux, now git.&quot;</p>
+
+</article>
+<article class="slide level-2" id="design-criteria">
+<h2>Design Criteria</h2>
+<ul class="simple">
+<li>Take CVS as an example of what not to do; if in doubt, make the exact
+opposite decision.</li>
+<li>Support a distributed workflow.</li>
+<li>Very strong safeguards against corruption, either accidental or malicious.</li>
+<li>Very high performance.</li>
+</ul>
+
+</article>
+<article class="slide level-2" id="tracking-revisions">
+<h2>Tracking revisions</h2>
+<img alt="_images/git-revisions.png" class="align-center" src="_images/git-revisions.png" />
+
+</article>
+<article class="slide level-2" id="workflow">
+<h2>Workflow</h2>
+<img alt="_images/local-operations.png" class="align-center" src="_images/local-operations.png" />
+
+</article>
+<article class="slide level-2" id="git-cheat-sheet">
+<h2>git Cheat Sheet</h2>
+<ul class="simple">
+<li>Discuss git cheat sheet</li>
+</ul>
+
+</article>
+<article class="slide level-2" id="getting-started">
+<h2>Getting Started</h2>
+<div class="highlight-bash"><div class="highlight"><pre>sudo yum install git-core
+</pre></div>
+</div>
+<p>OR</p>
+<p>Search for <tt class="docutils literal"><span class="pre">git-core</span></tt> in the Apper utility</p>
+
+</article>
+<article class="slide level-2" id="configure-git">
+<h2>Configure git</h2>
+<div class="highlight-bash"><div class="highlight"><pre>git config --global user.name <span class="s2">&quot;Christer Edwards&quot;</span>
+git config --global user.email <span class="s2">&quot;christer.edwards@gmail.com&quot;</span>
+git config --global color.ui <span class="nb">true</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="initialize-repository">
+<h2>Initialize Repository</h2>
+<div class="highlight-bash"><div class="highlight"><pre>git init
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="adding-files">
+<h2>Adding Files</h2>
+<div class="highlight-bash"><div class="highlight"><pre>git add &lt;filename&gt;
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="check-status">
+<h2>Check Status</h2>
+<div class="highlight-bash"><div class="highlight"><pre>git status
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="commit-changes">
+<h2>Commit Changes</h2>
+<div class="highlight-bash"><div class="highlight"><pre>git commit &lt;filename&gt;
+git commit -a
+git commit -m <span class="s2">&quot;&lt;message&gt;&quot;</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="view-log">
+<h2>View Log</h2>
+<div class="highlight-bash"><div class="highlight"><pre>git log
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="view-changes">
+<h2>View Changes</h2>
+<div class="highlight-bash"><div class="highlight"><pre>git diff &lt;filename&gt;
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="visualize-changes">
+<h2>Visualize Changes</h2>
+<div class="highlight-bash"><div class="highlight"><pre>gitk --all
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="git-references">
+<h2>Git References</h2>
+<ul class="simple">
+<li><a class="reference external" href="http://progit.org/book/">http://progit.org/book/</a></li>
+<li><a class="reference external" href="http://gitref.org/">http://gitref.org/</a></li>
+<li><a class="reference external" href="http://www.spheredev.org/wiki/Git_for_the_lazy">http://www.spheredev.org/wiki/Git_for_the_lazy</a></li>
+</ul>
+
+</article>
+<article class="slide level-2" id="lab-git">
+<h2>Lab : git</h2>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>git checkout the class repositories:</dt>
+<dd><ul class="first last simple">
+<li>PHP-EDTECH-520</li>
+<li>PHP-EDTECH-521</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt>(Optional)</dt>
+<dd><ul class="first last simple">
+<li>Create a github account</li>
+<li>Commit your code to github</li>
+</ul>
+</dd>
+</dl>
+
+</article>
+<article class="slide level-1" id="mail">
+<h1>Mail</h1>
+
+</article>
+<article class="slide level-2" id="objectives-mail">
+<h2>Objectives : Mail</h2>
+<blockquote>
+<div><ul class="simple">
+<li>Mail Functions</li>
+<li>MIME Types</li>
+<li>Attachments / HTML Email</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="sending-mail">
+<h2>Sending Mail</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">mail(&quot;a_friend@example.com&quot;, &quot;My Subject&quot;, &quot;Hello, world!&quot;);</span>
+</pre></div>
+</div>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$mailaddress = &quot;a_friend@example.com&quot;;</span>
+<span class="x">$mailsubject = &quot;My Subject&quot;;</span>
+<span class="x">$mailbody = &quot;Hello, world!&quot;;</span>
+<span class="x">mail($mailaddress, $mailsubject, $mailbody);</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="mime-types">
+<h2>MIME Types</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">print mime_content_type(&quot;myfiles.zip&quot;);</span>
+<span class="x">print mime_content_type(&quot;poppy.jpg&quot;);</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="easier-mail-sending-with-pear-mail">
+<h2>Easier Mail Sending with PEAR::Mail</h2>
+<div class="highlight-bash"><div class="highlight"><pre>sudo pear install --alldeps Mail
+</pre></div>
+</div>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">include(&#39;Mail.php&#39;);</span>
+<span class="x">$mail = Mail::factory(&quot;mail&quot;);</span>
+
+<span class="x">$headers = array(&quot;From&quot;=&gt;&quot;me@example.com&quot;, &quot;Subject&quot;=&gt;&quot;Test Mail&quot;);</span>
+<span class="x">$body = &quot;This is a test!&quot;;</span>
+<span class="x">$mail-&gt;send(&quot;best@friend.com&quot;, $headers, $body);</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="sending-mixed-type-messages-with-pear-mail-mime">
+<h2>Sending Mixed-Type Messages with PEAR::Mail_Mime</h2>
+<div class="highlight-bash"><div class="highlight"><pre>sudo pear install Mail_Mime
+</pre></div>
+</div>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">include(&#39;Mail.php&#39;);</span>
+<span class="x">include(&#39;Mail/mime.php&#39;);</span>
+
+<span class="x">$message = new Mail_mime();</span>
+<span class="x">$text = file_get_contents(&quot;mail_text.txt&quot;);</span>
+<span class="x">$html = file_get_contents(&quot;mail_html.html&quot;);</span>
+
+<span class="x">$message-&gt;setTXTBody($text);</span>
+<span class="x">$message-&gt;setHTMLBody($html);</span>
+<span class="x">$body = $message-&gt;get();</span>
+<span class="x">$extraheaders = array(&quot;From&quot;=&gt;&quot;me@example.com&quot;, &quot;Subject&quot;=&gt;&quot;My Subject 7&quot;);</span>
+<span class="x">$headers = $message-&gt;headers($extraheaders);</span>
+
+<span class="x">$mail = Mail::factory(&quot;mail&quot;);</span>
+<span class="x">$mail-&gt;send(&quot;best@friend.com&quot;, $headers, $body);</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="sending-real-attachments">
+<h2>Sending Real Attachments</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$message-&gt;addAttachment(&quot;example.txt&quot;);</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="lab-mail">
+<h2>Lab : Mail</h2>
+<ul class="simple">
+<li>Install PEAR::Mail and PEAR::Mail_MIME.</li>
+<li>Email form data to yourself.</li>
+<li>Remember to check-in your code changes.</li>
+</ul>
+
+</article>
+<article class="slide level-1" id="day-2">
+<h1>Day 2</h1>
+
+</article>
+<article class="slide level-2" id="id1">
+<h2>Overview</h2>
+<blockquote>
+<div><ul class="simple">
+<li>Files</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-1" id="files">
+<h1>Files</h1>
+
+</article>
+<article class="slide level-2" id="files-objectives">
+<h2>Files : Objectives</h2>
+<blockquote>
+<div><ul class="simple">
+<li>Reading, Editing and Creating Files</li>
+<li>Uploading Files</li>
+<li>Locking Files</li>
+<li>File Permissions</li>
+<li>Parsing Config Files</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-1" id="reading-files">
+<h1>Reading Files</h1>
+
+</article>
+<article class="slide level-2" id="readfile">
+<h2>readfile()</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$testfile = @readfile(&#39;test.txt&#39;);</span>
+
+<span class="x">if (!$testfile) {</span>
+<span class="x">  print &quot;Could not open file\n&quot;;</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="file-get-contents">
+<h2>file_get_contents()</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$filename = &#39;test.txt&#39;;</span>
+
+<span class="x">$filestring = file_get_contents($filename);</span>
+<span class="x">if ($filestring) {</span>
+<span class="x">    print $filestring</span>
+<span class="x">} else {</span>
+<span class="x">    print &quot;Could not open $filename.\n&quot;;</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="file">
+<h2>file()</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$filename = &quot;test.txt&quot;;</span>
+
+<span class="x">$filearray = file($filename);</span>
+
+<span class="x">if ($filearray) {</span>
+<span class="x">   while (list($var, $val) = each($filearray)) {</span>
+<span class="x">       ++$var;</span>
+<span class="x">       $val = trim($val);</span>
+<span class="x">       print &quot;Line $var: $val\n&quot;;</span>
+<span class="x">   }</span>
+<span class="x">} else {</span>
+<span class="x">   print &quot;Could not open $filename.\n&quot;;</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="fopen-and-fread">
+<h2>fopen() and fread()</h2>
+<dl class="docutils">
+<dt><strong>fopen()</strong></dt>
+<dd><ul class="first last simple">
+<li>file to open, how you would like it opened.</li>
+<li>read from 'r', write to 'w', or append to 'a'.</li>
+</ul>
+</dd>
+<dt><strong>fread()</strong></dt>
+<dd><ul class="first last simple">
+<li>a file handle to read, and the number of bytes to read.</li>
+</ul>
+</dd>
+</dl>
+
+</article>
+<article class="slide level-2" id="fopen-example">
+<h2>fopen() : Example</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$fh_flowers = fopen(&quot;kinds_of_flowers.txt&quot;, &quot;r&quot;)</span>
+<span class="x">      or die(&quot;Can&#39;t open flowers file!\n&quot;);</span>
+
+<span class="x">$fh_logfile = fopen(&quot;application.log&quot;, &quot;w&quot;)</span>
+<span class="x">    or die(&quot;Log file not writeable!\n&quot;);</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="fread-example-1">
+<h2>fread() : Example 1</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$huge_file = fopen(&quot;VERY_BIG_FILE&quot;, &quot;r&quot;);</span>
+
+<span class="x">while (!feof($huge_file)) {</span>
+<span class="x">    print fread($huge_file, 1024);</span>
+<span class="x">}</span>
+
+<span class="x">fclose($huge_file);</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="fread-example-2">
+<h2>fread() : Example 2</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$zipfile = fopen(&quot;data.zip&quot;, &quot;r&quot;);</span>
+
+<span class="x">if (fread($zipfile, 2) != &quot;PK&quot;) {</span>
+<span class="x">    print &quot;data.zip is not a valid Zip file!&quot;;</span>
+<span class="x">}</span>
+
+<span class="x">fclose($zipfile);</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="reading-by-line-using-fgets">
+<h2>Reading by line using fgets()</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$access_log = fopen(&quot;access_log&quot;, &quot;r&quot;);</span>
+
+<span class="x">while (!feof($access_log)) {</span>
+<span class="x">    $line = fgets($access_log);</span>
+
+<span class="x">    if (preg_match(&quot;/^Error:/&quot;, $line)) {</span>
+<span class="x">        print $line;</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+
+<span class="x">fclose($access_log);</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="lab-reading-files">
+<h2>Lab : Reading Files</h2>
+<p>Use 5 of the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>readfile()</li>
+<li>file_get_contents()</li>
+<li>file()</li>
+<li>fopen()</li>
+<li>fread()</li>
+<li>fgets()</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-1" id="creating-and-changing-files">
+<h1>Creating and Changing Files</h1>
+
+</article>
+<article class="slide level-2" id="file-put-contents">
+<h2>file_put_contents()</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$filename = &#39;new_file.txt&#39;;</span>
+
+<span class="x">$myarray[] = &quot;This is line one&quot;;</span>
+<span class="x">$myarray[] = &quot;This is line two&quot;;</span>
+<span class="x">$myarray[] = &quot;This is line three&quot;;</span>
+<span class="x">$mystring = implode(&quot;\n&quot;, $myarray);</span>
+<span class="x">$numbytes = file_put_contents($filename, &quot;$mystring\n&quot;);</span>
+<span class="x">print &quot;$numbytes bytes written&quot;;</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="fwrite">
+<h2>fwrite()</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$handle = fopen($filename, &quot;wb&quot;);</span>
+<span class="x">$numbytes = fwrite($handle, $mystring);</span>
+<span class="x">fclose($handle);</span>
+<span class="x">print &quot;$numbytes bytes written\n&quot;;</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="rename">
+<h2>rename()</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$filename2 = $filename . &#39;.old&#39;;</span>
+<span class="x">$result = rename($filename, $filename2);</span>
+<span class="x">if ($result) {</span>
+<span class="x">    print &quot;$filename has been renamed to $filename2.\n&quot;;</span>
+<span class="x">} else {</span>
+<span class="x">    print &quot;Error: couldn&#39;t rename $filename to $filename2!\n&quot;;</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="copy">
+<h2>copy()</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$filename2 = $filename . &#39;.old&#39;;</span>
+<span class="x">$result = copy($filename, $filename2);</span>
+<span class="x">if ($result) {</span>
+<span class="x">    print &quot;$filename has been copied to $filename2.\n&quot;;</span>
+<span class="x">} else {</span>
+<span class="x">    print &quot;Error: couldn&#39;t copy $filename to $filename2!\n&quot;;</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="unlink">
+<h2>unlink()</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (unlink($filename)) {</span>
+<span class="x">    print &quot;Deleted $filename!\n&quot;;</span>
+<span class="x">} else {</span>
+<span class="x">    print &quot;Delete of $filename failed!\n&quot;;</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="file-exists">
+<h2>file_exists()</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (file_exists(&quot;snapshot1.png&quot;)) {</span>
+<span class="x">    print &quot;Snapshot1.png exists!\n&quot;;</span>
+<span class="x">} else {</span>
+<span class="x">    print &quot;Snapshot1.png does not exist!\n&quot;;</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="lab-writing-files">
+<h2>Lab : Writing Files</h2>
+<p>Use 5 of the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>file_put_contents()</li>
+<li>fwrite()</li>
+<li>rename()</li>
+<li>copy()</li>
+<li>unlink()</li>
+<li>file_exists()</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="file-time-information">
+<h2>File Time Information</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$contacts = &quot;contacts.txt&quot;;</span>
+<span class="x">$atime = fileatime($contacts);</span>
+<span class="x">$mtime = filemtime($contacts);</span>
+
+<span class="x">$atime_str = date(&quot;F jS Y H:i:s&quot;, $atime);</span>
+<span class="x">$mtime_str = date(&quot;F jS Y H:i:s&quot;, $mtime);</span>
+<span class="x">// eg June 8th 2005 16:04:15</span>
+
+<span class="x">print &quot;File last accessed: $atime_str\n&quot;;</span>
+<span class="x">print &quot;File last modified: $mtime_str\n&quot;;</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="filename-information">
+<h2>Filename Information</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$fileinfo = pathinfo($filename);</span>
+<span class="x">var_dump($fileinfo);</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="locking-files-with-flock">
+<h2>Locking Files with flock()</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$handle = fopen( $filename, &quot;w&quot;);</span>
+<span class="x">// open it for WRITING (&quot;w&quot;)</span>
+
+<span class="x">if (flock($handle, LOCK_EX)) {</span>
+<span class="x">    // do your file writes here</span>
+<span class="x">    flock($handle, LOCK_UN);</span>
+<span class="x">    // unlock the file</span>
+<span class="x">} else {</span>
+<span class="x">    // flock() returned false, no lock obtained</span>
+<span class="x">    print &quot;Could not lock $filename!\n&quot;;</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="unix-file-permissions">
+<h2>UNIX File Permissions</h2>
+<div class="highlight-bash"><div class="highlight"><pre>-rw-r--r-- 1 cedwards cedwards 4.5K 2012-11-11 09:06 start.txt
+
+<span class="nv">r</span> <span class="o">=</span> 4 <span class="o">(</span><span class="nb">read</span><span class="o">)</span>
+<span class="nv">w</span> <span class="o">=</span> 2 <span class="o">(</span>write<span class="o">)</span>
+<span class="nv">x</span> <span class="o">=</span> 1 <span class="o">(</span>execute<span class="o">)</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="reading-file-permissions-and-status">
+<h2>Reading File Permissions and Status</h2>
+<blockquote>
+<div><ul class="simple">
+<li>is_readable()</li>
+<li>is_writeable()</li>
+<li>is_executable()</li>
+<li>is_file()</li>
+<li>is_dir()</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="changing-file-permissions-and-ownership">
+<h2>Changing File Permissions and Ownership</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">chmod(&quot;/var/www/myfile.txt&quot;, 0777);</span>
+<span class="x">chmod(&quot;/var/www/myfile.txt&quot;, 0755);</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="lab-file-permissions">
+<h2>Lab : File Permissions</h2>
+<p>Use 7 of the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>fileatime()</li>
+<li>filemtime()</li>
+<li>pathinfo()</li>
+<li>flock()</li>
+<li>is_readable(), is_writeable()</li>
+<li>is_file(), is_dir()</li>
+<li>chmod()</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-1" id="handling-file-uploads">
+<h1>Handling File Uploads</h1>
+
+</article>
+<article class="slide level-2" id="upload-html-form">
+<h2>Upload HTML Form</h2>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">enctype=</span><span class="s">&quot;multipart/form-data&quot;</span> <span class="na">action=</span><span class="s">&quot;uploader.php&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;MAX_FILE_SIZE&quot;</span> <span class="na">value=</span><span class="s">&quot;200000&quot;</span> <span class="nt">/&gt;</span>
+  Choose a file to upload: <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;uploadfile&quot;</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span> <span class="nt">/&gt;&lt;br</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Upload&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="upload-php-controller">
+<h2>Upload PHP Controller</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+  <span class="nv">$target_path</span> <span class="o">=</span> <span class="s2">&quot;uploads/&quot;</span><span class="p">;</span>
+
+  <span class="nv">$target_path</span> <span class="o">=</span> <span class="nv">$target_path</span> <span class="o">.</span> <span class="nb">basename</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;uploadfile&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nb">move_uploaded_file</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;uploadfile&#39;</span><span class="p">][</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">],</span> <span class="nv">$target_path</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;The file &quot;</span> <span class="o">.</span>  <span class="nb">basename</span><span class="p">(</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;uploadedfile&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+    <span class="o">.</span> <span class="s2">&quot; has been uploaded&quot;</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">echo</span> <span class="s2">&quot;There was an error uploading the file, please try again!&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="lab-upload">
+<h2>Lab : Upload</h2>
+<blockquote>
+<div><ul class="simple">
+<li>create a simple upload form</li>
+<li>move uploaded file using move_uploaded_file()</li>
+<li>upload image, save it and display it again (bonus)</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-1" id="regular-expressions">
+<h1>Regular Expressions</h1>
+
+</article>
+<article class="slide level-2" id="objectives-regular-expressions">
+<h2>Objectives : Regular Expressions</h2>
+<blockquote>
+<div><ul class="simple">
+<li>When to use regular expressions</li>
+<li>Regular expression patterns</li>
+<li>Practice, practice, practice</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="before">
+<h2>Before</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="defining-your-requirements-discuss">
+<h2>Defining Your Requirements (Discuss)</h2>
+<blockquote>
+<div><ul class="simple">
+<li>Define: Utah phone number</li>
+<li>Define: Utah address</li>
+<li>Define: secure password requirements</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="basic-regexps-with-preg-match">
+<h2>Basic Regexps with preg_match()</h2>
+<blockquote>
+<div><ul class="simple">
+<li>the pattern to match and the string to match it against</li>
+<li>returns as soon as it finds the first match</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="preg-match-example">
+<h2>preg_match() : Example</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/php/i&quot;, &quot;PHP&quot;)) {</span>
+<span class="x">    print &quot;Got match!\n&quot;;</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="regexp-character-classes">
+<h2>Regexp Character Classes</h2>
+<blockquote>
+<div><ul class="simple">
+<li>[abc]</li>
+<li>[A-Za-z]</li>
+<li>[0-9]</li>
+<li>[^123]</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="character-classes-example-1">
+<h2>Character Classes : Example 1</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/[Ff]oo/&quot;, &quot;Foo&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="character-classes-example-2">
+<h2>Character Classes : Example 2</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/[^a-z]esting/i&quot;, &quot;Testing&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="character-classes-example-3">
+<h2>Character Classes : Example 3</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/[A-S]esting/&quot;, &quot;Testing&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="lab-regex-character-classes">
+<h2>Lab : Regex Character Classes</h2>
+<p>Write three regular expression patterns using character classes for:</p>
+<blockquote>
+<div><ul class="simple">
+<li>a name, limited to the first half of the alphabet</li>
+<li>a job title in the medical industry</li>
+<li>a street address</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="regexp-special-characters">
+<h2>Regexp Special Characters</h2>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">+</span></tt>, <tt class="docutils literal"><span class="pre">*</span></tt>, <tt class="docutils literal"><span class="pre">?</span></tt></li>
+<li>{ }</li>
+<li>( )</li>
+<li>$, and ^</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="special-characters-example-1">
+<h2>Special Characters : Example 1</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/[A-Z][A-Z0-9]+/i&quot;, &quot;A123&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="special-characters-example-2">
+<h2>Special Characters : Example 2</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/[0-9]?[A-Z]+/&quot;, &quot;10GreenBottles&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="special-characters-example-3">
+<h2>Special Characters : Example 3</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/[A-Z]?[A-Z]?[A-Z]*/&quot;, &quot;&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="special-characters-example-4">
+<h2>Special Characters : Example 4</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/[A-Z]{3}/&quot;, &quot;FuZ&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="special-characters-example-5">
+<h2>Special Characters : Example 5</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/[A-Z]{3}/i&quot;, &quot;FuZ&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="special-characters-example-6">
+<h2>Special Characters : Example 6</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/[A-Z]{1,5}[0-9]{2}/i&quot;, &quot;adams42&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="special-characters-example-7">
+<h2>Special Characters : Example 7</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (print preg_match(&quot;/(Linux|Mac OS X)/&quot;, &quot;Linux&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="special-characters-example-8">
+<h2>Special Characters : Example 8</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (print preg_match(&quot;/contra(diction|vention)/&quot;, &quot;contravention&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="special-characters-example-9">
+<h2>Special Characters : Example 9</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (print preg_match(</span>
+<span class="x">&quot;/Windows (([0-9][0-9]+|Me|XP)|Codename (Whistler|Longhorn))/&quot;,</span>
+<span class="x">&quot;Windows Codename Whistler&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="special-characters-example-10">
+<h2>Special Characters : Example 10</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/\?$/&quot;, &quot;Does this match?&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="special-characters-example-11">
+<h2>Special Characters : Example 11</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/\?$/&quot;, &quot;Does this match? Are you sure.&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="special-characters-example-12">
+<h2>Special Characters : Example 12</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/^PHP FTW!/&quot;, &quot;PHP FTW!!!!!&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="lab-regex-special-characters">
+<h2>Lab : Regex Special Characters</h2>
+<p>Use each of the following in any number of preg_match() tests:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">+</span></tt>, <tt class="docutils literal"><span class="pre">*</span></tt>, <tt class="docutils literal"><span class="pre">?</span></tt></li>
+<li>{ }</li>
+<li>( )</li>
+<li>$, and ^</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="words-and-whitespace-regexps">
+<h2>Words and Whitespace Regexps</h2>
+<blockquote>
+<div><ul class="simple">
+<li>.</li>
+<li>s, S</li>
+<li>b, B</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="words-and-whitespace-example-1">
+<h2>Words and Whitespace : Example 1</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/c.t/&quot;, &quot;cart&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="words-and-whitespace-example-2">
+<h2>Words and Whitespace : Example 2</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/[\S]{7}[\s]{1}[\S]{6}/&quot;, &quot;Foolish Child&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="words-and-whitespace-example-3">
+<h2>Words and Whitespace : Example 3</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">if (preg_match(&quot;/no\b/&quot;, &quot;he said &#39;no!&#39;&quot;))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="storing-matched-strings">
+<h2>Storing Matched Strings</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">$a = &quot;Foo moo boo tool foo!&quot;;</span>
+<span class="x">preg_match_all(&quot;/[A-Za-z]oo\b/i&quot;, $a, $matches);</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="after">
+<h2>After</h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-2" id="lab-regular-expressions">
+<h2>Lab : Regular Expressions</h2>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>Define a regular expression to match:</dt>
+<dd><ul class="first last simple">
+<li>valid email addresses</li>
+<li>valid IP addresses</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-1" id="attributes-of-a-good-programmer">
+<h1>Attributes of a Good Programmer</h1>
+
+</article>
+<article class="slide level-2" id="laziness">
+<h2>Laziness</h2>
+<p><strong>Laziness</strong> - The quality that makes you go to great effort to reduce overall
+energy expenditure. It makes you write labor-saving programs that other people
+will find useful, and document what you wrote so you don't have to answer so
+many questions about it. Hence, the first great virtue of a programmer. Also
+hence, this book. See also impatience and hubris.</p>
+
+</article>
+<article class="slide level-2" id="impatience">
+<h2>Impatience</h2>
+<p><strong>Impatience</strong> - The anger you feel when the computer is being lazy. This makes
+you write programs that don't just react to your needs, but actually anticipate
+them. Or at least pretend to. Hence, the second great virtue of a programmer.
+See also laziness and hubris.</p>
+
+</article>
+<article class="slide level-2" id="hubris">
+<h2>Hubris</h2>
+<p><strong>Hubris</strong> - Excessive pride, the sort of thing Zeus zaps you for. Also the
+quality that makes you write (and maintain) programs that other people won't
+want to say bad things about. Hence, the third great virtue of a programmer.
+See also laziness and impatience.</p>
+
+</article>
+<article class="slide level-1" id="final-project">
+<h1>Final Project</h1>
+<p>Create a contest submission page and PHP backend.</p>
+
+</article>
+<article class="slide level-2" id="project-requirements">
+<h2>Project Requirements</h2>
+<blockquote>
+<div><ul class="simple">
+<li>Full Name</li>
+<li>Email (validated)</li>
+<li>Country (drop-down)</li>
+<li>File Upload</li>
+<li>Terms Agreement Checked</li>
+<li>Spam Deterrent Mechanism</li>
+<li>Separate Error and Success Pages</li>
+<li>Email all information, including attachment, and CC: submitter</li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="class-review">
+<h2>Class Review</h2>
+<p>Please take 5 minutes to review your class experience.</p>
+
+</article>
+<article class="slide level-2" id="additional-study">
+<h2>Additional Study</h2>
+<p>Code Academy PHP Track</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.codecademy.com/tracks/php">http://www.codecademy.com/tracks/php</a></li>
+</ul>
+</div></blockquote>
+
+</article>
+<article class="slide level-2" id="conclusion">
+<h2>Conclusion</h2>
+<p><strong>Questions? / Comments?</strong></p>
+<p><a class="reference external" href="mailto:christer&#46;edwards&#37;&#52;&#48;gmail&#46;com">christer<span>&#46;</span>edwards<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
+
+</article>
+
+
+</section>
+  </body>
+</html>
