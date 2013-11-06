@@ -3,11 +3,17 @@ PHP Level 2 (EDTECH-521)
 ========================
 
 - Author: Christer Edwards
-- Revision: 2013-04-09
+- Revision: 2013-11-05
 
 =====
 Day 1
 =====
+
+Review
+======
+
+- Web Form Design and Development
+  (http://freecourses.tutsplus.com)
 
 Overview
 ========
@@ -22,12 +28,13 @@ Revision Control
 Objectives : Revision Control
 =============================
 
+- Background / History
 - Discuss different source control methods.
 - Learn basic workflow for git.
 - Apply git to our existing source code.
 
-Brain Storming Revision Control
-===============================
+Brainstorming Revision Control
+==============================
 
 How would you keep track of your code changes over the lifetime of your
 project?
@@ -41,7 +48,7 @@ revisions of your software.
 .. code-block:: bash
 
     cp project project.bak
-    cp project project-2013-04-09
+    cp project project-2013-11-05
 
 Local Version Control (RCS)
 ===========================
@@ -93,6 +100,12 @@ Design Criteria
 - Very strong safeguards against corruption, either accidental or malicious.
 - Very high performance.
 
+Tracking revisions
+==================
+
+.. image:: /images/git-revisions.png
+  :align: center
+
 Workflow
 ========
 
@@ -111,6 +124,10 @@ Getting Started
 
     sudo yum install git-core
 
+OR
+
+Search for ``git-core`` in the Apper utility
+
 Configure git
 =============
 
@@ -118,6 +135,7 @@ Configure git
 
     git config --global user.name "Christer Edwards"
     git config --global user.email "christer.edwards@gmail.com"
+    git config --global color.ui true
 
 Initialize Repository
 =====================
@@ -224,7 +242,7 @@ MIME Types
 Easier Mail Sending with PEAR::Mail
 ===================================
 
-.. code-block:: php
+.. code-block:: bash
 
     sudo pear install --alldeps Mail
 
@@ -275,6 +293,10 @@ Lab : Mail
 - Install PEAR::Mail and PEAR::Mail_MIME.
 - Email form data to yourself.
 - Remember to check-in your code changes.
+
+=====
+Day 2
+=====
 
 Overview
 ========
