@@ -116,16 +116,16 @@ cp project project-2013-11-05
 </article>
 <article class="slide level-2" id="diff">
 <h2>diff</h2>
-<div class="highlight-php"><div class="highlight"><pre><span class="x">--- a/register.php  2012-07-27 11:58:26.636629381 -0600</span>
-<span class="x">+++ b/register.php  2012-07-27 11:59:11.983291297 -0600</span>
-<span class="x">@@ -1,6 +1,6 @@</span>
-<span class="x"> </span><span class="cp">&lt;?php</span>
- <span class="nv">$m</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
- <span class="o">-</span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;submit&#39;</span><span class="p">]))</span> <span class="p">{</span>
- <span class="o">+</span><span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;submit&#39;</span><span class="p">]))</span> <span class="p">{</span>
+<div class="highlight-diff"><div class="highlight"><pre><span class="gd">--- a/register.php  2012-07-27 11:58:26.636629381 -0600</span>
+<span class="gi">+++ b/register.php  2012-07-27 11:59:11.983291297 -0600</span>
+<span class="gu">@@ -1,6 +1,6 @@</span>
+&lt;?php
+$m = &#39;&#39;;
+<span class="gd">-if (!empty($_POST[&#39;submit&#39;])) {</span>
+<span class="gi">+if (isset($_POST[&#39;submit&#39;])) {</span>
 
-   <span class="nv">$valid</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
-   <span class="k">if</span> <span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;password1&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;password2&#39;</span><span class="p">])</span> <span class="p">{</span>
+$valid = true;
+if ($_POST[&#39;password1&#39;] != $_POST[&#39;password2&#39;]) {
 </pre></div>
 </div>
 
@@ -381,10 +381,9 @@ git commit -m <span class="s2">&quot;&lt;message&gt;&quot;</span>
 <blockquote>
 <div><ul class="simple">
 <li>Reading, Editing and Creating Files</li>
-<li>Uploading Files</li>
 <li>Locking Files</li>
 <li>File Permissions</li>
-<li>Parsing Config Files</li>
+<li>Uploading Files</li>
 </ul>
 </div></blockquote>
 
@@ -534,6 +533,7 @@ git commit -m <span class="s2">&quot;&lt;message&gt;&quot;</span>
 <span class="x">$myarray[] = &quot;This is line one&quot;;</span>
 <span class="x">$myarray[] = &quot;This is line two&quot;;</span>
 <span class="x">$myarray[] = &quot;This is line three&quot;;</span>
+
 <span class="x">$mystring = implode(&quot;\n&quot;, $myarray);</span>
 <span class="x">$numbytes = file_put_contents($filename, &quot;$mystring\n&quot;);</span>
 <span class="x">print &quot;$numbytes bytes written&quot;;</span>

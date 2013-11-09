@@ -71,18 +71,18 @@ Distributed Version Control (git)
 diff
 ====
 
-.. code-block:: php
+.. code-block:: diff
 
-  --- a/register.php  2012-07-27 11:58:26.636629381 -0600
-  +++ b/register.php  2012-07-27 11:59:11.983291297 -0600
-  @@ -1,6 +1,6 @@
-   <?php
-   $m = '';
-   -if (!empty($_POST['submit'])) {
-   +if (isset($_POST['submit'])) {
-
-     $valid = true;
-     if ($_POST['password1'] != $_POST['password2']) {
+    --- a/register.php  2012-07-27 11:58:26.636629381 -0600
+    +++ b/register.php  2012-07-27 11:59:11.983291297 -0600
+    @@ -1,6 +1,6 @@
+    <?php
+    $m = '';
+    -if (!empty($_POST['submit'])) {
+    +if (isset($_POST['submit'])) {
+    
+    $valid = true;
+    if ($_POST['password1'] != $_POST['password2']) {
 
 Brief Background
 ================
@@ -311,10 +311,9 @@ Files : Objectives
 ==================
 
   - Reading, Editing and Creating Files
-  - Uploading Files                    
   - Locking Files                      
   - File Permissions                   
-  - Parsing Config Files               
+  - Uploading Files                    
 
 =============
 Reading Files
@@ -454,6 +453,7 @@ file_put_contents()
     $myarray[] = "This is line one";
     $myarray[] = "This is line two";
     $myarray[] = "This is line three";
+
     $mystring = implode("\n", $myarray);
     $numbytes = file_put_contents($filename, "$mystring\n");
     print "$numbytes bytes written";
